@@ -1,4 +1,4 @@
-from .dnmmy import *
+from .dnxmy import *
 from .config_genarator import *
 from .variable_generator import *
 
