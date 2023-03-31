@@ -38,7 +38,7 @@ CLASSIFIERS = [
     'Topic :: Scientific/Engineering'
 ]
 
-with open('README.md', , encoding='UTF-8') as fp:
+with open('README.md', encoding='UTF-8') as fp:
     readme = fp.read()
 with open('CONTACT.txt', 'r') as fp:
     contacts = fp.read()
