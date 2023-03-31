@@ -38,6 +38,12 @@ CLASSIFIERS = [
     'Topic :: Scientific/Engineering'
 ]
 
+with open('README.md', 'r') as fp:
+    readme = fp.read()
+with open('CONTACT.txt', 'r') as fp:
+    contacts = fp.read()
+long_description = readme + '\n\n' + contacts
+
 setup(name=NAME,
       author=AUTHOR,
       author_email=AUTHOR_EMAIL,
