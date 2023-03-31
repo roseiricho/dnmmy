@@ -38,11 +38,12 @@ CLASSIFIERS = [
     'Topic :: Scientific/Engineering'
 ]
 
-with open('README.md', 'r') as fp:
+with open('README.md', , encoding='UTF-8') as fp:
     readme = fp.read()
 with open('CONTACT.txt', 'r') as fp:
     contacts = fp.read()
 long_description = readme + '\n\n' + contacts
+long_description_content_type = 'text/markdown'
 
 setup(name=NAME,
       author=AUTHOR,
@@ -51,6 +52,7 @@ setup(name=NAME,
       maintainer_email=AUTHOR_EMAIL,
       description=DESCRIPTION,
       long_description=long_description,
+      long_description_content_type=long_description_content_type,
       license=LICENSE,
       url=URL,
       version=VERSION,
