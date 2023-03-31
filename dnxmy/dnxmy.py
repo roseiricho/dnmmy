@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from .config_genarator import generate_default_column_info, optimize_array_order
+from .config_generator import generate_default_column_info, optimize_array_order
 from .variable_generator import generate_random_samples, generate_time, generate_arma_samples, generate_dependent_samples
 
 
@@ -124,23 +124,23 @@ class Dnxmy:
     df_missing = self.df.copy()
 
     
-  missing_type = missing_config.get('missing_type', None)
-  target_column_name = missing_config.get('target_column_name', None)
-  missing_rate = missing_config.get('missing_params', {}).get('missing_rate', None)
-  dependent_on = missing_config.get('missing_params', {}).get('dependent_on', None)
+    missing_type = missing_config.get('missing_type', None)
+    target_column_name = missing_config.get('target_column_name', None)
+    missing_rate = missing_config.get('missing_params', {}).get('missing_rate', None)
+    dependent_on = missing_config.get('missing_params', {}).get('dependent_on', None)
 
-  # missing
-  if missing_type == 'MCAR':
-    missing_index = np.random.choice(self.n, int(self.n * missing_rate), replace=False)
-    df_missing.loc[missing_index, target_column_name] = np.nan
-  elif missing_type == 'MAR':
-    missing_index = df_missing.query(dependent_on).index
-    missing_index = np.random.choice(missing_index, int(len(missing_index) * missing_rate), replace=False)
-    df_missing.loc[missing_index, target_column_name] = np.nan
-  elif missing_type == 'MNAR':
-    df_missing.loc[df_missing.query(dependent_on).index, target_column_name] = np.nan
-  else:
-    raise Exception('Invalid missing type')
+    # missing
+    if missing_type == 'MCAR':
+      missing_index = np.random.choice(self.n, int(self.n * missing_rate), replace=False)
+      df_missing.loc[missing_index, target_column_name] = np.nan
+    elif missing_type == 'MAR':
+      missing_index = df_missing.query(dependent_on).index
+      missing_index = np.random.choice(missing_index, int(len(missing_index) * missing_rate), replace=False)
+      df_missing.loc[missing_index, target_column_name] = np.nan
+    elif missing_type == 'MNAR':
+      df_missing.loc[df_missing.query(dependent_on).index, target_column_name] = np.nan
+    else:
+      raise Exception('Invalid missing type')
 
-  return df_missing, self.df
+    return df_missing, self.df
 
