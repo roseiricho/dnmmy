@@ -26,7 +26,9 @@ class Dnxmy:
     # initialize the class attributes
     self.n: int = n
     self.seed: int = seed
-    self
+    self.m: int = m
+    self.column_config: list = column_config or []
+
 
   def set_column_config(self):
     """
@@ -37,7 +39,12 @@ class Dnxmy:
     self.m = max(self.m, len(self.column_config))
 
     for i in range(self.m):
-      column_info = self.column_config[i] if i < len(self.column_config) else None
+      if i < len(self.column_config):
+        column_info = self.column_config[i]
+      else:
+        column_info = None
+        self.column_config.append(column_info)
+
       self.column_config[i] = generate_default_column_info(i, column_info)
 
   def generate(self):
@@ -55,24 +62,23 @@ class Dnxmy:
     self.set_column_config()
     column_names = [col_info['column_name'] for col_info in self.column_config]
     
-    optimize_array_order()
+    self.column_config = optimize_array_order(self.column_config)
 
     # generate the data
-    self.data = np.zeros((self.n, self.m))
+    self.df = pd.DataFrame()
 
-    for i, col_info in enumerate(self.column_config):
+    for col_info in self.column_config:
       if col_info['variable_type'] == 'independent':
-        self.data[:, i] = generate_random_samples(col_info['probability_distribution'], self.n)
+        self.df = pd.concat([self.df, generate_random_samples(col_info['column_name'], col_info['probability_distribution'], self.n)], axis=1)
       elif col_info['variable_type'] == 'constant':
-        self.data[:, i] = col_info['constant_value']
+        self.df = pd.concat([self.df, pd.Series([col_info['constant_value']] * self.n, name=col_info['column_name'])], axis=1)
       elif col_info['variable_type'] == 'time':
-        self.data[:, i] = generate_time(col_info['time_config'], self.n)
+        self.df = pd.concat([self.df, generate_time(col_info['column_name'], col_info['time_config'], self.n)], axis=1)
       elif col_info['variable_type'] == 'time_series':
-        self.data[:, i] = generate_arma_samples(col_info['time_series_config'], self.n)
+        self.df = pd.concat([self.df, generate_arma_samples(col_info['column_name'], col_info['time_series_config'], self.n)], axis=1)
       elif col_info['variable_type'] == 'dependent':
-        self.data[:, i] = generate_dependent_samples(self.column_config, self.data, col_info['dependent_on'], self.n)
+        self.df = pd.concat([self.df, generate_dependent_samples(col_info['column_name'], self.column_config, self.df, col_info['dependent_on'], self.n)], axis=1)
 
-    self.df = pd.DataFrame(self.data, columns=column_names)
 
     return self.df
 
@@ -89,22 +95,22 @@ class Dnxmy:
     if self.df is None:
       raise Exception('Data has not been generated yet')
 
-    self.data = np.zeros((n, self.m))
+    self.df_add = pd.DataFrame()
 
-    for i, col_info in enumerate(self.column_config):
+    for col_info in self.column_config:
       if col_info['variable_type'] == 'independent':
-        self.data[:, i] = generate_random_samples(col_info['probability_distribution'], n)
+        self.df_add = pd.concat([self.df_add, generate_random_samples(col_info['column_name'], col_info['probability_distribution'], self.n)], axis=1)
       elif col_info['variable_type'] == 'constant':
-        self.data[:, i] = col_info['constant_value']
+        self.df_add = pd.concat([self.df_add, pd.Series([col_info['constant_value']] * self.n, name=col_info['column_name'])], axis=1)
       elif col_info['variable_type'] == 'time':
-        self.data[:, i] = generate_time(col_info['time_config'], n)
+        self.df_add = pd.concat([self.df_add, generate_time(col_info['column_name'], col_info['time_config'], self.n)], axis=1)
       elif col_info['variable_type'] == 'time_series':
-        self.data[:, i] = generate_arma_samples(col_info['time_series_config'], n)
+        self.df_add = pd.concat([self.df_add, generate_arma_samples(col_info['column_name'], col_info['time_series_config'], self.n)], axis=1)
       elif col_info['variable_type'] == 'dependent':
-        self.data[:, i] = generate_dependent_samples(self.column_config, self.data, col_info['dependent_on'], n)
+        self.df_add = pd.concat([self.df_add, generate_dependent_samples(col_info['column_name'], self.column_config, self.df, col_info['dependent_on'], self.n)], axis=1)
 
     # add the new samples to the existing data
-    self.df = pd.concat([self.df, pd.DataFrame(self.data, columns=self.df.columns)], ignore_index=True)
+    self.df = pd.concat([self.df, self.df_add], ignore_index=True)
     
     # update the number of samples
     self.n += n
@@ -143,4 +149,5 @@ class Dnxmy:
       raise Exception('Invalid missing type')
 
     return df_missing, self.df
+
 

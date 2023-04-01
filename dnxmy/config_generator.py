@@ -68,6 +68,14 @@ def add_categorical_config(column_config: list, name: str, value: list, probabil
   Returns:
       list: List of column configurations.
   """
+
+  categories = []
+  for i in range(len(value)):
+    categories.append({
+      'value': value[i],
+      'probability': probability[i]
+    })
+
   # add a column configuration for the categorical variable
   column_config.append({
     'column_name': name,
@@ -75,8 +83,7 @@ def add_categorical_config(column_config: list, name: str, value: list, probabil
     'probability_distribution': {
       'type': 'categorical',
       'parameter': {
-        'value': value,
-        'probability': probability
+        'categories': categories
       }
     }
   })
@@ -104,7 +111,7 @@ def add_constant_config(column_config: list, name: str, constant_value: float) -
 
   return column_config
 
-def add_time_config(column_config: list, name: str, start_time: str, time_unit: str, time_format: str) -> list:
+def add_time_config(column_config: list, name: str, start_time: str, time_unit: str, time_format: str = '%Y-%m-%d') -> list:
   """
   Add a column configuration for a time variable.
 
@@ -133,18 +140,20 @@ def add_time_config(column_config: list, name: str, start_time: str, time_unit: 
 
 def add_arma_config(column_config: list, 
                     name:str, 
-                    intercept: float, 
-                    sigma: float, 
-                    ar_initial: float, 
-                    ar_order: int, 
-                    ar_params: list, 
-                    ar_shock_type: list, 
-                    ar_shock_value: list, 
-                    ma_initial: float, 
-                    ma_order: int, 
-                    ma_params: list, 
-                    ma_shock_type: list, 
-                    ma_shock_value: list) -> list:
+                    intercept: float = 0, 
+                    sigma: float = 0, 
+                    ar_initial: float = None, 
+                    ar_order: int = None, 
+                    ar_params: list = None, 
+                    ar_shock_time: list = None,
+                    ar_shock_type: list = None, 
+                    ar_shock_value: list = None, 
+                    ma_initial: float = None, 
+                    ma_order: int = None,
+                    ma_params: list = None,
+                    ma_shock_time: list = None,
+                    ma_shock_type: list = None, 
+                    ma_shock_value: list = None) -> list:
   """
   Add a column configuration for an ARMA variable.
 
@@ -170,20 +179,22 @@ def add_arma_config(column_config: list,
 
   # create a dictionary for the AR shocks
   ar_shock_dict = {}
-  for i in range(len(ar_shock_type)):
-    ar_shock_dict[i]['type'] = ar_shock_type[i]
-    ar_shock_dict[i]['value'] = ar_shock_value[i]
+  for i, t, v in zip(ar_shock_time, ar_shock_type, ar_shock_value):
+    ar_shock_dict[i] = {}
+    ar_shock_dict[i]['type'] = t
+    ar_shock_dict[i]['value'] = v
   
   # create a dictionary for the MA shocks
   ma_shock_dict = {}
-  for i in range(len(ma_shock_type)):
-    ma_shock_dict[i]['type'] = ma_shock_type[i]
-    ma_shock_dict[i]['value'] = ma_shock_value[i]
+  for i, t, v in zip(ma_shock_time, ma_shock_type, ma_shock_value):
+    ma_shock_dict[i] = {}
+    ma_shock_dict[i]['type'] = t
+    ma_shock_dict[i]['value'] = v
 
   # create the column configuration dictionary
   column_config.append({
     'column_name': name,
-    'variable_type': 'arma',
+    'variable_type': 'time_series',
     'time_series_config': {
       'intercept': intercept,
       'sigma': sigma,
@@ -204,7 +215,7 @@ def add_arma_config(column_config: list,
 
   return column_config
 
-def add_dependent_config(column_config: list, name: str, variables: list, beta: list, intercept: float, offset: float = None, link_function: str = 'identity') -> list:
+def add_dependent_config(column_config: list, name: str, variables: list, beta: list, intercept: float, offset: list = None, link_function: str = 'identity') -> list:
   """
   Add a column configuration for a dependent variable.
 
@@ -214,7 +225,7 @@ def add_dependent_config(column_config: list, name: str, variables: list, beta: 
       dependent_on (list): List of columns on which the dependent variable depends.
       beta (list): List of coefficients for the dependent variable.
       intercept (float): Intercept for the dependent variable.
-      offset (float, optional): Offset for the dependent variable. Defaults to None.
+      offset (list, optional): Offset for the dependent variable. Defaults to None.
       link_function (str, optional): Link function for the dependent variable. Defaults to None.
 
   Returns:
@@ -225,7 +236,7 @@ def add_dependent_config(column_config: list, name: str, variables: list, beta: 
     'column_name': name,
     'variable_type': 'dependent',
     'dependent_on': {
-      'variables': dependent_on,
+      'variables': variables,
       'beta': beta,
       'intercept': intercept,
       'offset': offset,
@@ -274,13 +285,14 @@ def optimize_array_order(column_config: list) -> list:
   column_dict = {col['column_name']: col for col in column_config}
   column_config = [column_dict[col] for col in sorted_list if col in column_dict]
 
+  return column_config
 
-def generate_missing_config(missing_config: dict, missing_type: str, target_column_name: str, missing_rate: float = None, dependent_on: str = None) -> dict:
+
+def generate_missing_config(missing_type: str, target_column_name: str, missing_rate: float = None, dependent_on: str = None) -> dict:
   """
   Generate a missing configuration dictionary.
 
   Args:
-      missing_config (dict): Dictionary of missing configurations.
       missing_type (str): Type of missingness.
       target_column_name (str): Name of the column to which the missingness is applied.
       missing_rate (float): Missing rate.
