@@ -79,7 +79,7 @@ def add_categorical_config(column_config: list, name: str, value: list, probabil
   # add a column configuration for the categorical variable
   column_config.append({
     'column_name': name,
-    'variable_type': 'indpendent',
+    'variable_type': 'independent',
     'probability_distribution': {
       'type': 'categorical',
       'parameter': {
