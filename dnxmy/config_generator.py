@@ -215,7 +215,7 @@ def add_arma_config(column_config: list,
 
   return column_config
 
-def add_dependent_config(column_config: list, name: str, variables: list, beta: list, intercept: float, offset: list = None, link_function: str = 'identity') -> list:
+def add_dependent_config(column_config: list, name: str, variables: list, beta: list, intercept: float, offset_column: str = None, offset_function: str = 'default', link_function: str = 'identity') -> list:
   """
   Add a column configuration for a dependent variable.
 
@@ -239,7 +239,10 @@ def add_dependent_config(column_config: list, name: str, variables: list, beta: 
       'variables': variables,
       'beta': beta,
       'intercept': intercept,
-      'offset': offset,
+      'offset': {
+        'column_name': offset_column,
+        'function': offset_function
+      },
       'link_function': link_function
     }
   })
@@ -263,6 +266,8 @@ def optimize_array_order(column_config: list) -> list:
     col_name = col['column_name']
     if col['variable_type'] == 'dependent':
       dependency_dict[col_name] = col['dependent_on']['variables'].copy()
+      if col['dependent_on'].get('offset')['column_name'] is not None:
+        dependency_dict[col_name].append(col['dependent_on']['offset']['column_name'])
     else:
       dependency_dict[col_name] = []
 

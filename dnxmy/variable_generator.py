@@ -5,7 +5,7 @@ import pandas as pd
 # list of supported probability distributions
 DISTRIBUTION_LIST = ['uniform', 'normal', 'beta', 'gamma', 'exponential', 'poisson', 'binomial', 'lognormal', 'chisquare', 'f', 't', 'multivariate_normal', 'multinomial', 'dirichlet', 'laplace', 'logistic', 'logseries', 'negative_binomial', 'noncentral_chisquare', 'noncentral_f', 'pareto', 'rayleigh', 'standard_cauchy', 'standard_exponential', 'standard_gamma', 'standard_normal', 'standard_t', 'triangular', 'vonmises', 'wald', 'weibull', 'zipf', 'gunbel', 'hypergeometric']
 
-def generate_random_samples(col_name, probability_distribution: dict, n: int):
+def generate_random_samples(col_name: str, probability_distribution: dict, n: int):
   """
   Generate random samples based on the provided probability distribution.
 
@@ -44,7 +44,7 @@ def generate_random_samples(col_name, probability_distribution: dict, n: int):
   #return getattr(np.random, distribution_type)(size=n, **kwargs)
   return pd.Series(getattr(np.random, distribution_type)(**kwargs, size=n), name=col_name)
 
-def generate_time(col_name, time_config: dict, n: int):
+def generate_time(col_name: str, time_config: dict, n: int):
   """
   Generate a time series based on the provided time configurations.
 
@@ -68,7 +68,7 @@ def generate_time(col_name, time_config: dict, n: int):
   return time_series
 
 
-def generate_arma_samples(col_name, time_series_config: dict, n: int) -> np.array:
+def generate_arma_samples(col_name: str, time_series_config: dict, n: int) -> np.array:
   """
   Generate a time series based on the provided time configurations.
 
@@ -117,7 +117,7 @@ def generate_arma_samples(col_name, time_series_config: dict, n: int) -> np.arra
   
   return pd.Series(arma_samples, name=col_name)
 
-def generate_dependent_samples(col_name, column_config: list, data, dependent_on: dict, n: int):
+def generate_dependent_samples(col_name: str, column_config: list, df, dependent_on: dict, n: int, offset: dict = None):
   """
   Generate dependent samples based on the provided dependent_on configurations.
 
@@ -130,17 +130,24 @@ def generate_dependent_samples(col_name, column_config: list, data, dependent_on
   """
 
   intercept = dependent_on['intercept']
-  offset = dependent_on['offset']
   link_function = dependent_on['link_function']
   beta = dependent_on['beta']
-  
+  sigma = dependent_on.get('sigma') or 0
+  offset = dependent_on.get('offset')
+  offset_function = offset['function'] if offset is not None else 'default'
+
   column_names = dependent_on['variables']
-  #column_num = [i for i, col in enumerate(column_config) if col['column_name'] in column_names]
 
   # transform data  
-  # dataのcolumn_namesの列を取り出し，numpy配列に変換
-  variables = data[column_names].to_numpy()
+  variables = df[column_names].to_numpy()
   beta = np.array(beta)
+  intercept = np.full(n, intercept)
+  offset = df[offset['column_name']].to_numpy() if offset['column_name'] is not None else np.zeros(n)
+
+  offset_functions = {
+    'default': lambda x: x,
+    'log': lambda x: np.log(x)
+  }
 
   # define link function
   link_functions = {
@@ -154,13 +161,10 @@ def generate_dependent_samples(col_name, column_config: list, data, dependent_on
     'loglog': lambda x: np.exp(-np.exp(-x)),
     'cauchy': lambda x: 1 / (1 + x ** 2),
     'logc': lambda x: np.log(x),
-    'exp': lambda x: np.exp(x),
     'power': lambda x: x ** 2,
     'logloglog': lambda x: np.exp(-np.exp(-np.exp(x))),
     'loglogloglog': lambda x: np.exp(-np.exp(-np.exp(-np.exp(x)))),
-    'logloglogloglog': lambda x: np.exp(-np.exp(-np.exp(-np.exp(-np.exp(x))))),
+    'logloglogloglog': lambda x: np.exp(-np.exp(-np.exp(-np.exp(-np.exp(x)))))
   }
   # generate samples
-  # convert to pandas series
-  return pd.Series(np.dot(variables, beta), name = col_name)
-  #return link_functions[link_function](np.dot(variables, beta) + offset)
+  return pd.Series(link_functions[link_function](np.dot(variables, beta) + offset_functions[offset_function](offset) + intercept) + np.random.normal(0, sigma, n), name = col_name)
