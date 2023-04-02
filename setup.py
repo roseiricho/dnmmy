@@ -14,13 +14,12 @@ URL = 'https://github.com/roseiricho/dnxmy'
 LICENSE = 'MIT License'
 DOWNLOAD_URL = 'https://github.com/roseiricho/dnxmy'
 VERSION = dnxmy.__version__
-PYTHON_REQUIRES = ">=3.7"
+PYTHON_REQUIRES = ">=3.6"
 
 INSTALL_REQUIRES = [
-    'numpy >=1.20.3',
-    'pandas>=1.2.4'
+    'numpy>=1.22.4',
+    'pandas>=1.4.4'
 ]
-
 
 PACKAGES = [
     'dnxmy'
