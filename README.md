@@ -37,4 +37,4 @@ Bugs may be reported at [issues](https://github.com/roseiricho/dnxmy/issues).
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/roseiricho/dnxmy/blob/main/LICENSE) file for details.
 
 ## Documentation
-The documentation is available at [docs](https://roseiricho.github.io/dnxmy/).
+The documentation is available at [docs](https://roseiricho.github.io/dnxmy/dnxmy.html#).
