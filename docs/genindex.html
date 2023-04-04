@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; dnxmy 0.0.0 documentation</title>
+  <title>Index &mdash; dnxmy 1.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -71,28 +71,30 @@
  | <a href="#D"><strong>D</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#M"><strong>M</strong></a>
- | <a href="#O"><strong>O</strong></a>
  | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
  
 </div>
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="dnxmy.html#dnxmy.config_generator.add_arma_config">add_arma_config() (in module dnxmy.config_generator)</a>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig.add_arma_column">add_arma_column() (dnxmy.config_generator.DnxmyConfig method)</a>
 </li>
-      <li><a href="dnxmy.html#dnxmy.config_generator.add_categorical_config">add_categorical_config() (in module dnxmy.config_generator)</a>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig.add_categorical_column">add_categorical_column() (dnxmy.config_generator.DnxmyConfig method)</a>
 </li>
-      <li><a href="dnxmy.html#dnxmy.config_generator.add_constant_config">add_constant_config() (in module dnxmy.config_generator)</a>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig.add_constant_column">add_constant_column() (dnxmy.config_generator.DnxmyConfig method)</a>
+</li>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig.add_dependent_colmn">add_dependent_colmn() (dnxmy.config_generator.DnxmyConfig method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="dnxmy.html#dnxmy.config_generator.add_dependent_config">add_dependent_config() (in module dnxmy.config_generator)</a>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig.add_independent_column">add_independent_column() (dnxmy.config_generator.DnxmyConfig method)</a>
 </li>
-      <li><a href="dnxmy.html#dnxmy.config_generator.add_independent_config">add_independent_config() (in module dnxmy.config_generator)</a>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig.add_missing_config">add_missing_config() (dnxmy.config_generator.DnxmyConfig method)</a>
 </li>
       <li><a href="dnxmy.html#dnxmy.dnxmy.Dnxmy.add_samples">add_samples() (dnxmy.dnxmy.Dnxmy method)</a>
 </li>
-      <li><a href="dnxmy.html#dnxmy.config_generator.add_time_config">add_time_config() (in module dnxmy.config_generator)</a>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig.add_time_part_column">add_time_part_column() (dnxmy.config_generator.DnxmyConfig method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -132,6 +134,8 @@
         <li><a href="dnxmy.html#module-dnxmy.variable_generator">module</a>
 </li>
       </ul></li>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig">DnxmyConfig (class in dnxmy.config_generator)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -142,17 +146,15 @@
 </li>
       <li><a href="dnxmy.html#dnxmy.variable_generator.generate_arma_samples">generate_arma_samples() (in module dnxmy.variable_generator)</a>
 </li>
-      <li><a href="dnxmy.html#dnxmy.config_generator.generate_default_column_info">generate_default_column_info() (in module dnxmy.config_generator)</a>
+      <li><a href="dnxmy.html#dnxmy.config_generator.generate_default_config">generate_default_config() (in module dnxmy.config_generator)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="dnxmy.html#dnxmy.variable_generator.generate_dependent_samples">generate_dependent_samples() (in module dnxmy.variable_generator)</a>
 </li>
-      <li><a href="dnxmy.html#dnxmy.config_generator.generate_missing_config">generate_missing_config() (in module dnxmy.config_generator)</a>
-</li>
       <li><a href="dnxmy.html#dnxmy.variable_generator.generate_random_samples">generate_random_samples() (in module dnxmy.variable_generator)</a>
 </li>
-      <li><a href="dnxmy.html#dnxmy.variable_generator.generate_time">generate_time() (in module dnxmy.variable_generator)</a>
+      <li><a href="dnxmy.html#dnxmy.variable_generator.generate_time_part">generate_time_part() (in module dnxmy.variable_generator)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -178,18 +180,18 @@
   </ul></td>
 </tr></table>
 
-<h2 id="O">O</h2>
+<h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="dnxmy.html#dnxmy.config_generator.optimize_array_order">optimize_array_order() (in module dnxmy.config_generator)</a>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig.set_dataset_config">set_dataset_config() (dnxmy.config_generator.DnxmyConfig method)</a>
 </li>
   </ul></td>
 </tr></table>
 
-<h2 id="S">S</h2>
+<h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="dnxmy.html#dnxmy.dnxmy.Dnxmy.set_column_config">set_column_config() (dnxmy.dnxmy.Dnxmy method)</a>
+      <li><a href="dnxmy.html#dnxmy.config_generator.DnxmyConfig.t_sort">t_sort() (dnxmy.config_generator.DnxmyConfig method)</a>
 </li>
   </ul></td>
 </tr></table>
