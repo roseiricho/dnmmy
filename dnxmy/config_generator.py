@@ -1,3 +1,5 @@
+
+#
 def generate_default_column_info(i: int, column_info: dict = None) -> dict:
   """
   Generate a dictionary with default values for column configurations.
