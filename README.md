@@ -1,4 +1,5 @@
 # Dnxmy: Dummy Data for Machine Learning and Statistics
+[![PyPI Version](https://img.shields.io/pypi/v/dnxmy.svg)](https://pypi.org/project/dnxmy/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Python module for creating dummy data sets for testing machine learning and statistical analysis.
