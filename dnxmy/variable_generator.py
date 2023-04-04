@@ -5,6 +5,7 @@ import pandas as pd
 # list of supported probability distributions
 DISTRIBUTION_LIST = ['uniform', 'normal', 'beta', 'gamma', 'exponential', 'poisson', 'binomial', 'lognormal', 'chisquare', 'f', 't', 'multivariate_normal', 'multinomial', 'dirichlet', 'laplace', 'logistic', 'logseries', 'negative_binomial', 'noncentral_chisquare', 'noncentral_f', 'pareto', 'rayleigh', 'standard_cauchy', 'standard_exponential', 'standard_gamma', 'standard_normal', 'standard_t', 'triangular', 'vonmises', 'wald', 'weibull', 'zipf', 'gunbel', 'hypergeometric']
 
+
 def generate_random_samples(col_name: str, probability_distribution: dict, n: int) -> pd.Series:
   """
   Generate random samples based on the provided probability distribution.
@@ -44,24 +45,25 @@ def generate_random_samples(col_name: str, probability_distribution: dict, n: in
   # generate random samples
   return pd.Series(getattr(np.random, distribution_type)(**kwargs, size=n), name=col_name)
 
-def generate_time(col_name: str, time_config: dict, n: int) -> pd.Series:
+
+def generate_time_part(col_name: str, time_part_config: dict, n: int) -> pd.Series:
   """
   Generate a time series based on the provided time configurations.
 
   Args:
       col_name (str): Name of the column.
-      time_config (dict): Dictionary containing the time configurations.
+      time_part_config (dict): Dictionary containing the time configurations.
       n (int): Number of samples to generate.
 
   Returns:
       pd.Series: Series containing the generated time series.
   """
-  if not time_config:
-    raise ValueError("time_config must be specified.")
+  if not time_part_config:
+    raise ValueError("time_part_config must be specified.")
   
-  start_time, time_unit, time_format = time_config.get('start_time'), time_config.get('time_unit'), time_config.get('time_format')
+  start_time, time_unit, time_format = time_part_config.get('start_time'), time_part_config.get('time_unit'), time_part_config.get('time_format')
   if not all([start_time, time_unit, time_format]):
-    raise ValueError("start_time, time_unit, and time_format must be specified in time_config.")
+    raise ValueError("start_time, time_unit, and time_format must be specified in time_part_config.")
   
   # generate time series
   time_series = pd.Series(pd.date_range(start_time, periods=n, freq=time_unit).strftime(time_format), name = col_name)
@@ -119,14 +121,19 @@ def generate_arma_samples(col_name: str, time_series_config: dict, n: int) -> pd
   
   return pd.Series(arma_samples, name=col_name)
 
-def generate_dependent_samples(col_name: str, column_config: list, df, dependent_on: dict, n: int, offset: dict = None) -> pd.Series:
+
+def generate_dependent_samples(col_name: str, dataset_config: list, df, dependent_on: dict, n: int, offset: dict = None) -> pd.Series:
   """
   Generate dependent samples based on the provided dependent_on configurations.
 
   Args:
       col_name (str): Name of the column.
+      dataset_config (list): List containing the dataset configurations.
+      df (pd.DataFrame): Dataframe containing the dataset.
       dependent_on (dict): Dictionary containing the dependent_on configurations.
       n (int): Number of samples to generate.
+      offset (dict, optional): Dictionary containing the offset configurations. 
+        Defaults to None.
 
   Returns:
       pd.Series: Series containing the generated samples.
