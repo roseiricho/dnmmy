@@ -47,7 +47,7 @@ class Dnxmy:
 
       self.column_config[i] = generate_default_column_info(i, column_info)
 
-  def generate(self):
+  def generate(self) -> pd.DataFrame:
     """
     Generate the data based on the provided configurations.
     
@@ -82,7 +82,7 @@ class Dnxmy:
 
     return self.df
 
-  def add_samples(self, n: int):
+  def add_samples(self, n: int) -> pd.DataFrame:
     """
     Add samples to the generated data.
 
@@ -117,7 +117,7 @@ class Dnxmy:
 
     return self.df
 
-  def miss(self, missing_config: dict):
+  def miss(self, missing_config: dict) -> pd.DataFrame:
     """
     Generate missing values based on the provided configurations.
     

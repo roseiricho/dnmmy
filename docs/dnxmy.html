@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dnxmy package &mdash; dnxmy 0.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            dnxmy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">dnxmy package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-dnxmy.config_generator">dnxmy.config_generator module</a></li>
+<li><a class="reference internal" href="#module-dnxmy.dnxmy">dnxmy.dnxmy module</a></li>
+<li><a class="reference internal" href="#module-dnxmy.variable_generator">dnxmy.variable_generator module</a></li>
+<li><a class="reference internal" href="#module-dnxmy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">dnxmy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">dnxmy package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/dnxmy.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dnxmy-package">
+<h1>dnxmy package<a class="headerlink" href="#dnxmy-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-dnxmy.config_generator">
+<span id="dnxmy-config-generator-module"></span><h2>dnxmy.config_generator module<a class="headerlink" href="#module-dnxmy.config_generator" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.config_generator.add_arma_config">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.config_generator.</span></span><span class="sig-name descname"><span class="pre">add_arma_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_initial</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_shock_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_shock_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_shock_value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ma_initial</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ma_order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ma_params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ma_shock_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ma_shock_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ma_shock_value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#dnxmy.config_generator.add_arma_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a column configuration for an ARMA variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column_config</strong> (<em>list</em>) – List of column configurations.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>intercept</strong> (<em>float</em>) – Intercept for the ARMA variable.</p></li>
+<li><p><strong>sigma</strong> (<em>float</em>) – Sigma for the ARMA variable.</p></li>
+<li><p><strong>ar_initial</strong> (<em>float</em>) – Initial value for the AR part of the ARMA variable.</p></li>
+<li><p><strong>ar_order</strong> (<em>int</em>) – Order of the AR part of the ARMA variable.</p></li>
+<li><p><strong>ar_params</strong> (<em>list</em>) – List of AR parameters for the ARMA variable.</p></li>
+<li><p><strong>ar_shock_type</strong> (<em>list</em>) – List of shock types for the AR part of the ARMA variable.</p></li>
+<li><p><strong>ar_shock_value</strong> (<em>list</em>) – List of shock values for the AR part of the ARMA variable.</p></li>
+<li><p><strong>ma_initial</strong> (<em>float</em>) – Initial value for the MA part of the ARMA variable.</p></li>
+<li><p><strong>ma_order</strong> (<em>int</em>) – Order of the MA part of the ARMA variable.</p></li>
+<li><p><strong>ma_params</strong> (<em>list</em>) – List of MA parameters for the ARMA variable.</p></li>
+<li><p><strong>ma_shock_type</strong> (<em>list</em>) – List of shock types for the MA part of the ARMA variable.</p></li>
+<li><p><strong>ma_shock_value</strong> (<em>list</em>) – List of shock values for the MA part of the ARMA variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of column configurations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.config_generator.add_categorical_config">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.config_generator.</span></span><span class="sig-name descname"><span class="pre">add_categorical_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probability</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#dnxmy.config_generator.add_categorical_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a column configuration for a categorical variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column_config</strong> (<em>list</em>) – List of column configurations.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>value</strong> (<em>list</em>) – List of values of the categorical variable.</p></li>
+<li><p><strong>probability</strong> (<em>list</em>) – List of probabilities of the values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of column configurations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.config_generator.add_constant_config">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.config_generator.</span></span><span class="sig-name descname"><span class="pre">add_constant_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constant_value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#dnxmy.config_generator.add_constant_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a column configuration for a constant variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column_config</strong> (<em>list</em>) – List of column configurations.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>constant_value</strong> (<em>float</em>) – Value of the constant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of column configurations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.config_generator.add_dependent_config">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.config_generator.</span></span><span class="sig-name descname"><span class="pre">add_dependent_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_function</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">link_function</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'identity'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#dnxmy.config_generator.add_dependent_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a column configuration for a dependent variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column_config</strong> (<em>list</em>) – List of column configurations.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>dependent_on</strong> (<em>list</em>) – List of columns on which the dependent variable depends.</p></li>
+<li><p><strong>beta</strong> (<em>list</em>) – List of coefficients for the dependent variable.</p></li>
+<li><p><strong>intercept</strong> (<em>float</em>) – Intercept for the dependent variable.</p></li>
+<li><p><strong>offset</strong> (<em>list</em><em>, </em><em>optional</em>) – Offset for the dependent variable. Defaults to None.</p></li>
+<li><p><strong>link_function</strong> (<em>str</em><em>, </em><em>optional</em>) – Link function for the dependent variable. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of column configurations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.config_generator.add_independent_config">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.config_generator.</span></span><span class="sig-name descname"><span class="pre">add_independent_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probability_distribution_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'uniform'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probability_distribution_params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">{'high':</span> <span class="pre">1,</span> <span class="pre">'low':</span> <span class="pre">0}</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#dnxmy.config_generator.add_independent_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a column configuration for an independent variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column_config</strong> (<em>list</em>) – List of column configurations.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>probability_distribution_type</strong> (<em>str</em>) – Type of the probability distribution.</p></li>
+<li><p><strong>probability_distribution_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Parameters of the probability distribution.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of column configurations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.config_generator.add_time_config">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.config_generator.</span></span><span class="sig-name descname"><span class="pre">add_time_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_unit</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'%Y-%m-%d'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#dnxmy.config_generator.add_time_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a column configuration for a time variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column_config</strong> (<em>list</em>) – List of column configurations.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>start_time</strong> (<em>str</em>) – Start time of the time variable.</p></li>
+<li><p><strong>time_unit</strong> (<em>str</em>) – Time unit of the time variable.</p></li>
+<li><p><strong>time_format</strong> (<em>str</em>) – Time format of the time variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of column configurations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.config_generator.generate_default_column_info">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.config_generator.</span></span><span class="sig-name descname"><span class="pre">generate_default_column_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_info</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#dnxmy.config_generator.generate_default_column_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a dictionary with default values for column configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – Index of the column.</p></li>
+<li><p><strong>column_info</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary containing column configurations.
+Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary with default values for column configurations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.config_generator.generate_missing_config">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.config_generator.</span></span><span class="sig-name descname"><span class="pre">generate_missing_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">missing_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_column_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependent_on</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#dnxmy.config_generator.generate_missing_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a missing configuration dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>missing_type</strong> (<em>str</em>) – Type of missingness.</p></li>
+<li><p><strong>target_column_name</strong> (<em>str</em>) – Name of the column to which the missingness is applied.</p></li>
+<li><p><strong>missing_rate</strong> (<em>float</em>) – Missing rate.</p></li>
+<li><p><strong>dependent_on</strong> (<em>list</em><em>, </em><em>optional</em>) – List of columns on which the missingness depends. Defaults to None.</p></li>
+<li><p><strong>beta</strong> (<em>list</em><em>, </em><em>optional</em>) – List of coefficients for the missingness. Defaults to None.</p></li>
+<li><p><strong>intercept</strong> (<em>float</em><em>, </em><em>optional</em>) – Intercept for the missingness. Defaults to None.</p></li>
+<li><p><strong>offset</strong> (<em>float</em><em>, </em><em>optional</em>) – Offset for the missingness. Defaults to None.</p></li>
+<li><p><strong>link_function</strong> (<em>str</em><em>, </em><em>optional</em>) – Link function for the missingness. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary of missing configurations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.config_generator.optimize_array_order">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.config_generator.</span></span><span class="sig-name descname"><span class="pre">optimize_array_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#dnxmy.config_generator.optimize_array_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimize the order of the array based on the provided column configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-dnxmy.dnxmy">
+<span id="dnxmy-dnxmy-module"></span><h2>dnxmy.dnxmy module<a class="headerlink" href="#module-dnxmy.dnxmy" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="dnxmy.dnxmy.Dnxmy">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">dnxmy.dnxmy.</span></span><span class="sig-name descname"><span class="pre">Dnxmy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dnxmy.dnxmy.Dnxmy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dnxmy.dnxmy.Dnxmy.add_samples">
+<span class="sig-name descname"><span class="pre">add_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#dnxmy.dnxmy.Dnxmy.add_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add samples to the generated data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – Number of samples to be added.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame containing the generated data with added samples.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dnxmy.dnxmy.Dnxmy.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#dnxmy.dnxmy.Dnxmy.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the data based on the provided configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrame containing the generated data.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dnxmy.dnxmy.Dnxmy.miss">
+<span class="sig-name descname"><span class="pre">miss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">missing_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="headerlink" href="#dnxmy.dnxmy.Dnxmy.miss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate missing values based on the provided configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>missing_config</strong> (<em>dict</em>) – Dictionary containing the missing configurations.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame containing the generated data with missing values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dnxmy.dnxmy.Dnxmy.set_column_config">
+<span class="sig-name descname"><span class="pre">set_column_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dnxmy.dnxmy.Dnxmy.set_column_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set column configurations based on the provided configurations or the default configurations.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-dnxmy.variable_generator">
+<span id="dnxmy-variable-generator-module"></span><h2>dnxmy.variable_generator module<a class="headerlink" href="#module-dnxmy.variable_generator" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.variable_generator.generate_arma_samples">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.variable_generator.</span></span><span class="sig-name descname"><span class="pre">generate_arma_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_series_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.series.Series</span><a class="headerlink" href="#dnxmy.variable_generator.generate_arma_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a time series(ARMA model) based on the provided time configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col_name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>time_series_config</strong> (<em>dict</em>) – Dictionary containing the time configurations.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Number of samples to generate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Series containing the generated samples.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.variable_generator.generate_dependent_samples">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.variable_generator.</span></span><span class="sig-name descname"><span class="pre">generate_dependent_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependent_on</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.series.Series</span><a class="headerlink" href="#dnxmy.variable_generator.generate_dependent_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate dependent samples based on the provided dependent_on configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col_name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>dependent_on</strong> (<em>dict</em>) – Dictionary containing the dependent_on configurations.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Number of samples to generate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Series containing the generated samples.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.variable_generator.generate_random_samples">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.variable_generator.</span></span><span class="sig-name descname"><span class="pre">generate_random_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probability_distribution</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.series.Series</span><a class="headerlink" href="#dnxmy.variable_generator.generate_random_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random samples based on the provided probability distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col_name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>probability_distribution</strong> (<em>dict</em>) – Dictionary containing the probability distribution.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Number of samples to be generated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Series containing the generated samples.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dnxmy.variable_generator.generate_time">
+<span class="sig-prename descclassname"><span class="pre">dnxmy.variable_generator.</span></span><span class="sig-name descname"><span class="pre">generate_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.series.Series</span><a class="headerlink" href="#dnxmy.variable_generator.generate_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a time series based on the provided time configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col_name</strong> (<em>str</em>) – Name of the column.</p></li>
+<li><p><strong>time_config</strong> (<em>dict</em>) – Dictionary containing the time configurations.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Number of samples to generate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Series containing the generated time series.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-dnxmy">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dnxmy" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, roseiricho.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -5,16 +5,17 @@ import pandas as pd
 # list of supported probability distributions
 DISTRIBUTION_LIST = ['uniform', 'normal', 'beta', 'gamma', 'exponential', 'poisson', 'binomial', 'lognormal', 'chisquare', 'f', 't', 'multivariate_normal', 'multinomial', 'dirichlet', 'laplace', 'logistic', 'logseries', 'negative_binomial', 'noncentral_chisquare', 'noncentral_f', 'pareto', 'rayleigh', 'standard_cauchy', 'standard_exponential', 'standard_gamma', 'standard_normal', 'standard_t', 'triangular', 'vonmises', 'wald', 'weibull', 'zipf', 'gunbel', 'hypergeometric']
 
-def generate_random_samples(col_name: str, probability_distribution: dict, n: int):
+def generate_random_samples(col_name: str, probability_distribution: dict, n: int) -> pd.Series:
   """
   Generate random samples based on the provided probability distribution.
 
   Args:
+      col_name (str): Name of the column.
       probability_distribution (dict): Dictionary containing the probability distribution.
-      n (int): Number of samples to generate.
+      n (int): Number of samples to be generated.
 
   Returns:
-      np.array: Array of random samples.
+      pd.Series: Series containing the generated samples.
   """
 
   distribution_type = probability_distribution.get('type')
@@ -41,19 +42,19 @@ def generate_random_samples(col_name: str, probability_distribution: dict, n: in
     kwargs['p'] = probabilities
 
   # generate random samples
-  #return getattr(np.random, distribution_type)(size=n, **kwargs)
   return pd.Series(getattr(np.random, distribution_type)(**kwargs, size=n), name=col_name)
 
-def generate_time(col_name: str, time_config: dict, n: int):
+def generate_time(col_name: str, time_config: dict, n: int) -> pd.Series:
   """
   Generate a time series based on the provided time configurations.
 
   Args:
+      col_name (str): Name of the column.
       time_config (dict): Dictionary containing the time configurations.
       n (int): Number of samples to generate.
 
   Returns:
-      np.array: Array of time series.
+      pd.Series: Series containing the generated time series.
   """
   if not time_config:
     raise ValueError("time_config must be specified.")
@@ -68,16 +69,17 @@ def generate_time(col_name: str, time_config: dict, n: int):
   return time_series
 
 
-def generate_arma_samples(col_name: str, time_series_config: dict, n: int) -> np.array:
+def generate_arma_samples(col_name: str, time_series_config: dict, n: int) -> pd.Series:
   """
-  Generate a time series based on the provided time configurations.
+  Generate a time series(ARMA model) based on the provided time configurations.
 
   Args:
+      col_name (str): Name of the column.
       time_series_config (dict): Dictionary containing the time configurations.
       n (int): Number of samples to generate.
 
   Returns:
-      np.array: Array of time series.
+      pd.Series: Series containing the generated samples.
   """
   if time_series_config is None:
     raise ValueError("time_series_config must be specified.")
@@ -117,16 +119,17 @@ def generate_arma_samples(col_name: str, time_series_config: dict, n: int) -> np
   
   return pd.Series(arma_samples, name=col_name)
 
-def generate_dependent_samples(col_name: str, column_config: list, df, dependent_on: dict, n: int, offset: dict = None):
+def generate_dependent_samples(col_name: str, column_config: list, df, dependent_on: dict, n: int, offset: dict = None) -> pd.Series:
   """
   Generate dependent samples based on the provided dependent_on configurations.
 
   Args:
+      col_name (str): Name of the column.
       dependent_on (dict): Dictionary containing the dependent_on configurations.
       n (int): Number of samples to generate.
 
   Returns:
-      np.array: Array of dependent samples.
+      pd.Series: Series containing the generated samples.
   """
 
   intercept = dependent_on['intercept']
