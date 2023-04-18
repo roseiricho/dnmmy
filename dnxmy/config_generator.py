@@ -183,17 +183,19 @@ class DnxmyConfig:
     """
     # create a dictionary for the AR shocks
     ar_shock_dict = {}
-    for i, t, v in zip(ar_shock_time, ar_shock_type, ar_shock_value):
-      ar_shock_dict[i] = {}
-      ar_shock_dict[i]['type'] = t
-      ar_shock_dict[i]['value'] = v
+    if ar_shock_time is not None or ar_shock_type is not None or ar_shock_value is not None:
+      for i, t, v in zip(ar_shock_time, ar_shock_type, ar_shock_value):
+        ar_shock_dict[i] = {}
+        ar_shock_dict[i]['type'] = t
+        ar_shock_dict[i]['value'] = v
     
     # create a dictionary for the MA shocks
     ma_shock_dict = {}
-    for i, t, v in zip(ma_shock_time, ma_shock_type, ma_shock_value):
-      ma_shock_dict[i] = {}
-      ma_shock_dict[i]['type'] = t
-      ma_shock_dict[i]['value'] = v
+    if ma_shock_time is not None or ma_shock_type is not None or ma_shock_value is not None:
+      for i, t, v in zip(ma_shock_time, ma_shock_type, ma_shock_value):
+        ma_shock_dict[i] = {}
+        ma_shock_dict[i]['type'] = t
+        ma_shock_dict[i]['value'] = v
 
     # create the column configuration dictionary
     self.dataset_config.append({
@@ -218,7 +220,7 @@ class DnxmyConfig:
     })
 
 
-  def add_dependent_colmn(self, 
+  def add_dependent_column(self, 
                           col_name: str, 
                           variables: list, 
                           beta: list, 
@@ -256,6 +258,19 @@ class DnxmyConfig:
         'link_function': link_function
       }
     })
+  
+  
+  def delete_column_config(self, col_name: str):
+    """
+    Delete a column configuration.
+
+    Args:
+        col_name (str): Name of the column.
+    """
+    for col in self.dataset_config:
+      if col['column_name'] == col_name:
+        self.dataset_config.remove(col)
+        break
 
 
   def t_sort(self):
