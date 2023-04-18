@@ -100,7 +100,7 @@ def generate_arma_samples(col_name: str, time_series_config: dict, n: int) -> pd
     ar = sum([ar_params['params'][j] * ar_samples[i - j - 1] for j in range(min(i, ar_params.get('order', 0)))])
     
     # add shock
-    if ar_params['shock'].get(i) is not None:
+    if ar_params.get('shock').get(i) is not None:
       shock_value = ar_params['shock'][i]['value']
       if ar_params['shock'][i]['type'] == 'sigma':
         shock_value *= time_series_config['sigma']
@@ -110,7 +110,7 @@ def generate_arma_samples(col_name: str, time_series_config: dict, n: int) -> pd
     ma = sum([ma_params['params'][j] * ma_samples[i - j - 1] for j in range(min(i, ma_params.get('order', 0)))])
 
     # add shock
-    if ma_params['shock'].get(i) is not None:
+    if ma_params.get('shock').get(i) is not None:
       shock_value = ma_params['shock'][i]['value']
       if ma_params['shock'][i]['type'] == 'sigma':
         shock_value *= time_series_config['sigma']
