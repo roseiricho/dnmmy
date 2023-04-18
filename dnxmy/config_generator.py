@@ -220,7 +220,7 @@ class DnxmyConfig:
     })
 
 
-  def add_dependent_colmn(self, 
+  def add_dependent_column(self, 
                           col_name: str, 
                           variables: list, 
                           beta: list, 
@@ -258,6 +258,19 @@ class DnxmyConfig:
         'link_function': link_function
       }
     })
+  
+  
+  def delete_column_config(self, col_name: str):
+    """
+    Delete a column configuration.
+
+    Args:
+        col_name (str): Name of the column.
+    """
+    for col in self.dataset_config:
+      if col['column_name'] == col_name:
+        self.dataset_config.remove(col)
+        break
 
 
   def t_sort(self):
