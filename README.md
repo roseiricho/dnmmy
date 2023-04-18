@@ -29,7 +29,8 @@ import dnxmy
 ### Example
 The following notebook is a reference case study using this library.
 
-- [Example]()
+- [Experiments on missing data completion](https://github.com/roseiricho/analysis-portfolio/blob/main/Experiments_on_missing_data_completion.ipynb)
+- [Experiments on model selection for AIC and BIC](https://github.com/roseiricho/analysis-portfolio/blob/main/Experiments_on_model_selection_for_AIC_and_BIC.ipynb)
 
 ## Support
 Bugs may be reported at [issues](https://github.com/roseiricho/dnxmy/issues).
