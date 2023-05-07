@@ -47,23 +47,22 @@ class Dnxmy:
     self.dnxmy_config.set_dataset_config(self.m)
     self.dnxmy_config.t_sort()
     self.dataset_config = self.dnxmy_config.dataset_config
-
-    column_names = [column_config['column_name'] for column_config in self.dataset_config]
     
     # generate the data
     self.df = pd.DataFrame()
 
-    for column_config in self.dataset_config:
+    for column_name in self.dataset_config.keys():
+      column_config = self.dataset_config[column_name]
       if column_config['variable_type'] == 'independent':
-        self.df = pd.concat([self.df, generate_random_samples(column_config['column_name'], column_config['probability_distribution'], self.n)], axis=1)
+        self.df = pd.concat([self.df, generate_random_samples(column_name, column_config['probability_distribution'], self.n)], axis=1)
       elif column_config['variable_type'] == 'constant':
-        self.df = pd.concat([self.df, pd.Series([column_config['constant_value']] * self.n, name=column_config['column_name'])], axis=1)
+        self.df = pd.concat([self.df, pd.Series([column_config['constant_value']] * self.n, name = column_name)], axis=1)
       elif column_config['variable_type'] == 'time_part':
-        self.df = pd.concat([self.df, generate_time_part(column_config['column_name'], column_config['time_part_config'], self.n)], axis=1)
+        self.df = pd.concat([self.df, generate_time_part(column_name, column_config['time_part_config'], self.n)], axis=1)
       elif column_config['variable_type'] == 'time_series':
-        self.df = pd.concat([self.df, generate_arma_samples(column_config['column_name'], column_config['time_series_config'], self.n)], axis=1)
+        self.df = pd.concat([self.df, generate_arma_samples(column_name, column_config['time_series_config'], self.n)], axis=1)
       elif column_config['variable_type'] == 'dependent':
-        self.df = pd.concat([self.df, generate_dependent_samples(column_config['column_name'], self.dataset_config, self.df, column_config['dependent_on'], self.n)], axis=1)
+        self.df = pd.concat([self.df, generate_dependent_samples(column_name, self.dataset_config, self.df, column_config['dependent_on'], self.n)], axis=1)
 
     return self.df
 
@@ -83,17 +82,18 @@ class Dnxmy:
 
     self.df_add = pd.DataFrame()
 
-    for column_config in self.dataset_config:
+    for column_name in self.dataset_config.keys():
+      column_config = self.dataset_config[column_name]
       if column_config['variable_type'] == 'independent':
-        self.df_add = pd.concat([self.df_add, generate_random_samples(column_config['column_name'], column_config['probability_distribution'], n)], axis=1)
+        self.df_add = pd.concat([self.df_add, generate_random_samples(column_name, column_config['probability_distribution'], n)], axis=1)
       elif column_config['variable_type'] == 'constant':
-        self.df_add = pd.concat([self.df_add, pd.Series([column_config['constant_value']] * n, name=column_config['column_name'])], axis=1)
+        self.df_add = pd.concat([self.df_add, pd.Series([column_config['constant_value']] * n, name = column_name)], axis=1)
       elif column_config['variable_type'] == 'time_part':
-        self.df_add = pd.concat([self.df_add, generate_time_part(column_config['column_name'], column_config['time_part_config'], n)], axis=1)
+        self.df_add = pd.concat([self.df_add, generate_time_part(column_name, column_config['time_part_config'], n)], axis=1)
       elif column_config['variable_type'] == 'time_series':
-        self.df_add = pd.concat([self.df_add, generate_arma_samples(column_config['column_name'], column_config['time_series_config'], n)], axis=1)
+        self.df_add = pd.concat([self.df_add, generate_arma_samples(column_name, column_config['time_series_config'], n)], axis=1)
       elif column_config['variable_type'] == 'dependent':
-        self.df_add = pd.concat([self.df_add, generate_dependent_samples(column_config['column_name'], self.dataset_config, self.df_add, column_config['dependent_on'], n)], axis=1)
+        self.df_add = pd.concat([self.df_add, generate_dependent_samples(column_name, self.dataset_config, self.df_add, column_config['dependent_on'], n)], axis=1)
 
     # add the new samples to the existing data
     self.df = pd.concat([self.df, self.df_add], ignore_index=True)
@@ -120,9 +120,12 @@ class Dnxmy:
     # set the missing configurations
     self.missing_config = self.dnxmy_config.missing_config
     
-    for missing_column_config in self.missing_config:
+    missing_column_names = self.missing_config.keys()
+
+    for missing_column_name in missing_column_names:
+      missing_column_config = self.missing_config[missing_column_name]
       missing_type = missing_column_config.get('missing_type', None)
-      target_column_name = missing_column_config.get('target_column_name', None)
+      target_column_name = missing_column_name
       missing_rate = missing_column_config.get('missing_params', {}).get('missing_rate', None)
       dependent_on = missing_column_config.get('missing_params', {}).get('dependent_on', None)
 
