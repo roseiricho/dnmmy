@@ -1,10 +1,9 @@
 
-def generate_default_config(i: int, column_config: dict = None) -> dict:
+def generate_default_config(column_config: dict = None) -> dict:
   """
   Generate a dictionary with default values for column configurations.
 
   Args:
-      i (int): Index of the column.
       column_config (dict, optional): Dictionary containing column configurations.
         Defaults to None.
 
@@ -13,7 +12,6 @@ def generate_default_config(i: int, column_config: dict = None) -> dict:
   """
 
   default_config = {
-    'column_name': f"x_{i}",
     'variable_type': 'independent',
     'probability_distribution': {
       'type': 'uniform',
@@ -40,8 +38,8 @@ class DnxmyConfig:
     """
 
     # initialize the class attributes
-    self.dataset_config: list = []
-    self.missing_config: list = []
+    self.dataset_config: dict = {}
+    self.missing_config: dict = {}
 
 
   def add_independent_column(self, col_name: str, probability_distribution_type: str = 'uniform', probability_distribution_params: dict = {'low': 0, 'high': 1}):
@@ -56,14 +54,13 @@ class DnxmyConfig:
           Defaults to {'low': 0, 'high': 1}.
     """
     # create the configuration for the column
-    self.dataset_config.append({
-      'column_name': col_name,
+    self.dataset_config[col_name] = {
       'variable_type': 'independent',
       'probability_distribution': {
         'type': probability_distribution_type,
         'parameter': probability_distribution_params
       }
-    })
+    }
 
 
   def add_categorical_column(self, col_name: str, value: list, probability: list):
@@ -83,8 +80,7 @@ class DnxmyConfig:
       })
 
     # add a column configuration for the categorical variable
-    self.dataset_config.append({
-      'column_name': col_name,
+    self.dataset_config[col_name] = {
       'variable_type': 'independent',
       'probability_distribution': {
         'type': 'categorical',
@@ -92,7 +88,7 @@ class DnxmyConfig:
           'categories': categories
         }
       }
-    })
+    }
 
 
   def add_constant_column(self, col_name: str, constant_value: float = 1):
@@ -105,11 +101,10 @@ class DnxmyConfig:
           Defaults to 1.
     """
     # add a column configuration for the constant variable
-    self.dataset_config.append({
-      'column_name': col_name,
+    self.dataset_config[col_name] = {
       'variable_type': 'constant',
       'constant_value': constant_value
-    })
+    }
 
 
   def add_time_part_column(self, col_name: str, start_time: str, time_unit: str, time_format: str = '%Y-%m-%d'):
@@ -124,15 +119,14 @@ class DnxmyConfig:
           Defaults to '%Y-%m-%d'.
     """
     # add a column configuration for the time variable
-    self.dataset_config.append({
-      'column_name': col_name,
+    self.dataset_config[col_name] = {
       'variable_type': 'time_part',
       'time_part_config': {
         'start_time': start_time,
         'time_unit': time_unit,
         'time_format': time_format
       }
-    })
+    }
 
 
   def add_arma_column(self, 
@@ -198,8 +192,7 @@ class DnxmyConfig:
         ma_shock_dict[i]['value'] = v
 
     # create the column configuration dictionary
-    self.dataset_config.append({
-      'column_name': col_name,
+    self.dataset_config[col_name] = {
       'variable_type': 'time_series',
       'time_series_config': {
         'intercept': intercept,
@@ -217,7 +210,7 @@ class DnxmyConfig:
           'shock': ma_shock_dict
         }
       }
-    })
+    }
 
 
   def add_dependent_column(self, 
@@ -244,8 +237,7 @@ class DnxmyConfig:
           Defaults to 'identity'.
     """
     # add a column configuration for the dependent variable
-    self.dataset_config.append({
-      'column_name': col_name,
+    self.dataset_config[col_name] = {
       'variable_type': 'dependent',
       'dependent_on': {
         'variables': variables,
@@ -257,7 +249,7 @@ class DnxmyConfig:
         },
         'link_function': link_function
       }
-    })
+    }
   
   
   def delete_column_config(self, col_name: str):
@@ -267,10 +259,7 @@ class DnxmyConfig:
     Args:
         col_name (str): Name of the column.
     """
-    for col in self.dataset_config:
-      if col['column_name'] == col_name:
-        self.dataset_config.remove(col)
-        break
+    del self.dataset_config[col_name]
 
 
   def t_sort(self):
@@ -282,8 +271,8 @@ class DnxmyConfig:
     column_dict = {}
 
     # create a dictionary of dependencies
-    for col in self.dataset_config:
-      col_name = col['column_name']
+    for col_name in self.dataset_config:
+      col = self.dataset_config[col_name]
       if col['variable_type'] == 'dependent':
         dependency_dict[col_name] = col['dependent_on']['variables'].copy()
         if col['dependent_on'].get('offset')['column_name'] is not None:
@@ -306,23 +295,30 @@ class DnxmyConfig:
           for dep_col in dep_cols:
             if col == dep_col:
               dep_cols.remove(col)
-
-    column_dict = {col['column_name']: col for col in self.dataset_config}
-    self.dataset_config = [column_dict[col] for col in sorted_list if col in column_dict]
+              
+    column_dict = {col_name: self.dataset_config[col_name] for col_name in sorted_list}
+    
+    self.dataset_config = column_dict
 
 
   def set_dataset_config(self, m: int):
     """
     Set dataset configurations based on the provided configurations or the default configurations.
     """
-    for i in range(m):
-      if i < len(self.dataset_config):
-        column_config = self.dataset_config[i]
+    col_names = list(self.dataset_config.keys())
+    if len(self.dataset_config) <= m:
+      for i in range(m - len(self.dataset_config)):
+        if 'col_' + str(i) in col_names:
+          i += 1
+        col_names.append('col_' + str(i))
+    
+    for col_name in col_names:
+      if self.dataset_config.get(col_name) is not None:
+        column_config = self.dataset_config[col_name]
       else:
         column_config = None
-        self.dataset_config.append(column_config)
-
-      self.dataset_config[i] = generate_default_config(i, column_config)
+      
+      self.dataset_config[col_name] = generate_default_config(column_config)
 
 
   def add_missing_config(self, target_col_name: str, missing_type: str = 'MCAR', missing_rate: float = None, dependent_on: str = None):
@@ -345,11 +341,10 @@ class DnxmyConfig:
       raise ValueError("Missing type must be one of 'MCAR', 'MAR', or 'MNAR'!")
     
     # add a missing configuration
-    self.missing_config.append({
+    self.missing_config[target_col_name] = {
       'missing_type': missing_type,
-      'target_column_name': target_col_name,
       'missing_params': {
         'missing_rate': missing_rate,
         'dependent_on': dependent_on
       }
-    })
+    }
